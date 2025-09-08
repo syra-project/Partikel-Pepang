@@ -1,1 +1,1082 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Bahasa Jepang - JLPT N4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Sederhana untuk Tampilan yang Bersih */
+        :root {
+            --primary-color: #2980b9;
+            --secondary-color: #3498db;
+            --background-color: #f4f7f9;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --correct-color: #27ae60;
+            --wrong-color: #c0392b;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #ecf0f1;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #7f8c8d;
+            transition: background-color 0.3s, color 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 25px;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-top: 30px;
+        }
+
+        /* Styling untuk elemen-elemen spesifik */
+        code {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .tips-box {
+            background-color: #e9f5ff;
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+        }
+        
+        .tips-box h4 {
+            margin: 0 0 10px 0;
+            color: var(--secondary-color);
+        }
+
+        ruby {
+            font-size: 1.1em;
+        }
+
+        rt {
+            font-size: 0.7em;
+            color: #7f8c8d;
+        }
+
+        .contoh-kalimat {
+            margin-top: 15px;
+            padding-left: 15px;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .terjemahan {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: -10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .quiz-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+        }
+
+        .quiz-feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .quiz-feedback.correct {
+            background-color: #eafaf1;
+            color: var(--correct-color);
+        }
+
+        .quiz-feedback.wrong {
+            background-color: #fbe9e7;
+            color: var(--wrong-color);
+        }
+
+        .options button {
+            margin: 5px;
+            padding: 10px 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .options button:hover {
+            background-color: #ecf0f1;
+            transform: translateY(-2px);
+        }
+        
+        .quiz-controls {
+            margin-top: 15px;
+            text-align: right;
+        }
+        .quiz-controls button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+        }
+        .check-btn { background-color: var(--correct-color); }
+        .reset-btn { background-color: #e67e22; }
+
+        .summary-list {
+            list-style-type: '✓ ';
+            padding-left: 20px;
+        }
+
+        #homework-answer {
+            display: none;
+            margin-top: 10px;
+            padding: 15px;
+            background: #e9f5ff;
+            border: 1px solid #a3d1f7;
+            border-radius: 4px;
+        }
+        
+        .topic-section {
+            display: none;
+        }
+        
+        .topic-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        /* Penyesuaian untuk Tampilan Mobile Friendly */
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
+                align-items: flex-start; /* Konten dimulai dari atas di mobile */
+            }
+
+            header {
+                padding: 15px 20px;
+            }
+
+            header h1 {
+                font-size: 1.4em;
+            }
+            
+            header p {
+                font-size: 0.9em;
+            }
+
+            .tabs {
+                flex-wrap: wrap; /* Izinkan tab untuk wrap jika perlu */
+            }
+
+            .tab-button {
+                font-size: 0.85em;
+                padding: 12px 5px;
+            }
+
+            .tab-content {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 1.25em;
+            }
+
+            .options button {
+                padding: 8px 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Belajar Bahasa Jepang JLPT N4</h1>
+            <p>Materi Pembelajaran Hari Ini</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'materi')">Materi & Contoh</button>
+            <button class="tab-button" onclick="openTab(event, 'latihan')">Latihan Interaktif</button>
+        </div>
+
+        <!-- Konten Materi & Contoh -->
+        <div id="materi" class="tab-content active">
+            <h2>Materi Bahasa Jepang</h2>
+
+            <div id="topic1" class="topic-section active">
+                <h3>Partikel へ (e)</h3>
+                <p>Partikel <strong>へ (e)</strong> digunakan untuk <strong>menunjukkan arah pergerakan atau tujuan</strong>. Partikel ini selalu diikuti oleh kata kerja yang berhubungan dengan pergerakan, seperti 「行きます」(pergi), 「来ます」(datang), atau 「帰ります」(pulang).</p>
+
+                <div class="contoh-kalimat">
+                    <p>1. <ruby>明日<rt>あした</rt></ruby>、<ruby>京都<rt>きょうと</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きます。</p>
+                    <p class="terjemahan"> (Besok, saya akan pergi ke Kyoto.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>2. <ruby>友達<rt>ともだち</rt></ruby>の<ruby>家<rt>いえ</rt></ruby>へ<ruby>帰<rt>かえ</rt></ruby>ります。</p>
+                    <p class="terjemahan"> (Saya pulang ke rumah teman.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>3. <ruby>先生<rt>せんせい</rt></ruby>は<ruby>今<rt>いま</rt></ruby>、<ruby>学校<rt>がっこう</rt></ruby>へ<ruby>来<rt>き</rt></ruby>ます。</p>
+                    <p class="terjemahan"> (Guru sekarang datang ke sekolah.)</p>
+                </div>
+                
+                <div class="tips-box">
+                    <h4>Tips & Trik: へ (e) vs に (ni)</h4>
+                    <p>Partikel <strong>へ</strong> dan <strong>に</strong> sama-sama bisa digunakan untuk menunjukkan tujuan pergerakan. Namun, ada perbedaan halus: <strong>へ</strong> lebih menekankan pada <strong>arah</strong>, sementara <strong>に</strong> lebih menekankan pada <strong>tujuan akhir</strong>. Pada sebagian besar kasus, keduanya bisa digunakan.</p>
+                </div>
+            </div>
+
+            <div id="topic2" class="topic-section">
+                <h3>Partikel に (ni)</h3>
+                <p>Partikel <strong>に (ni)</strong> memiliki banyak fungsi. Kita akan fokus pada tiga fungsi utamanya:</p>
+                <ul>
+                    <li><strong>Menunjukkan tujuan pergerakan:</strong> Sama seperti へ, tetapi lebih menekankan pada tempat tujuan.</li>
+                    <li><strong>Menunjukkan waktu:</strong> Digunakan untuk menandai titik waktu spesifik, seperti jam, hari, atau bulan.</li>
+                    <li><strong>Menunjukkan tempat keberadaan:</strong> Digunakan dengan kata kerja 「あります」(ada, untuk benda mati) dan 「います」(ada, untuk makhluk hidup).</li>
+                </ul>
+
+                <div class="contoh-kalimat">
+                    <p>1. 7<ruby>時<rt>じ</rt></ruby>に<ruby>起<rt>お</rt></ruby>きます。(Waktu)</p>
+                    <p class="terjemahan"> (Saya bangun jam 7.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>2. <ruby>私<rt>わたし</rt></ruby>は<ruby>日本<rt>にほん</rt></ruby>に<ruby>行<rt>い</rt></ruby>きたいです。(Tujuan)</p>
+                    <p class="terjemahan"> (Saya ingin pergi ke Jepang.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>3. <ruby>部屋<rt>へや</rt></ruby>にテレビがありません。(Keberadaan)</p>
+                    <p class="terjemahan"> (Di kamar tidak ada TV.)</p>
+                </div>
+
+                <div class="tips-box">
+                    <h4>Tips & Trik: に (ni) vs で (de)</h4>
+                    <p>Ini adalah salah satu topik yang paling membingungkan. Ingatlah dua hal ini: <strong>に</strong> digunakan untuk menunjukkan tempat di mana <strong>sesuatu ada atau berada (keberadaan)</strong>, sedangkan <strong>で</strong> digunakan untuk menunjukkan tempat di mana <strong>sebuah aktivitas dilakukan</strong>.</p>
+                </div>
+            </div>
+
+            <div id="topic3" class="topic-section">
+                <h3>Partikel で (de)</h3>
+                <p>Partikel <strong>で (de)</strong> digunakan untuk menunjukkan <strong>tempat terjadinya suatu aksi atau alat yang digunakan untuk melakukan aksi</strong>.</p>
+                <div class="contoh-kalimat">
+                    <p>1. <ruby>図書館<rt>としょかん</rt></ruby>で<ruby>勉強<rt>べんきょう</rt></ruby>します。(Tempat)</p>
+                    <p class="terjemahan"> (Saya belajar di perpustakaan.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>2. <ruby>電車<rt>でんしゃ</rt></ruby>で<ruby>会社<rt>かいしゃ</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きます。(Alat)</p>
+                    <p class="terjemahan"> (Saya pergi ke kantor dengan kereta.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>3. <ruby>箸<rt>はし</rt></ruby>で<ruby>食<rt>た</rt></ruby>べます。(Alat)</p>
+                    <p class="terjemahan"> (Saya makan dengan sumpit.)</p>
+                </div>
+
+                <div class="tips-box">
+                    <h4>Tips & Trik: Tempat Aksi</h4>
+                    <p>Lihat kata kerjanya. Jika kata kerja adalah kata kerja yang butuh aksi (seperti <code>食べる</code>, <code>書く</code>, <code>話す</code>), gunakan <strong>で</strong>. Jika kata kerja adalah kata kerja keberadaan (<code>ある</code>, <code>いる</code>), gunakan <strong>に</strong>.</p>
+                </div>
+            </div>
+
+            <div id="topic4" class="topic-section">
+                <h3>Partikel を (o)</h3>
+                <p>Partikel <strong>を (o)</strong> digunakan untuk <strong>menandai objek langsung dari sebuah kata kerja transitif</strong> (kata kerja yang butuh objek).</p>
+                <div class="contoh-kalimat">
+                    <p>1. <ruby>水<rt>みず</rt></ruby>を<ruby>飲<rt>の</rt></ruby>みます。(Objek: air)</p>
+                    <p class="terjemahan"> (Saya minum air.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>2. <ruby>日本語<rt>にほんご</rt></ruby>を<ruby>勉強<rt>べんきょう</rt></ruby>します。(Objek: bahasa Jepang)</p>
+                    <p class="terjemahan"> (Saya belajar bahasa Jepang.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>3. テレビを<ruby>見<rt>み</rt></ruby>ます。(Objek: TV)</p>
+                    <p class="terjemahan"> (Saya menonton TV.)</p>
+                </div>
+                
+                <div class="tips-box">
+                    <h4>Tips & Trik: Ingat "WO"</h4>
+                    <p>Ketika Anda melihat kata kerja yang membutuhkan objek, seperti "makan" atau "membaca", hampir selalu gunakan partikel <strong>を</strong> sebelum kata kerjanya. Pikirkan saja "kata benda + を + kata kerja".</p>
+                </div>
+            </div>
+            
+            <div id="topic5" class="topic-section">
+                <h3>Partikel と (to)</h3>
+                <p>Partikel <strong>と (to)</strong> memiliki dua fungsi utama:</p>
+                <ul>
+                    <li><strong>Menghubungkan kata benda:</strong> Berarti "dan".</li>
+                    <li><strong>Menunjukkan pendamping:</strong> Berarti "dengan".</li>
+                </ul>
+                <div class="contoh-kalimat">
+                    <p>1. <ruby>私<rt>わたし</rt></ruby>は<ruby>家族<rt>かぞく</rt></ruby>と<ruby>映画<rt>えいが</rt></ruby>を<ruby>見<rt>み</rt></ruby>ました。(Dengan)</p>
+                    <p class="terjemahan"> (Saya menonton film dengan keluarga.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>2. <ruby>私<rt>わたし</rt></ruby>はパンと<ruby>牛乳<rt>ぎゅうにゅう</rt></ruby>を<ruby>買<rt>か</rt></ruby>いました。(Dan)</p>
+                    <p class="terjemahan"> (Saya membeli roti dan susu.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>3. <ruby>友達<rt>ともだち</rt></ruby>と<ruby>話<rt>はな</rt></ruby>します。(Dengan)</p>
+                    <p class="terjemahan"> (Saya berbicara dengan teman.)</p>
+                </div>
+                
+                <div class="tips-box">
+                    <h4>Tips & Trik: と vs や</h4>
+                    <p>Keduanya bisa berarti "dan," tetapi <strong>と</strong> digunakan untuk daftar yang <strong>lengkap</strong>. Sedangkan <strong>や</strong> digunakan untuk daftar yang <strong>tidak lengkap</strong> (dan lain-lain).</p>
+                </div>
+            </div>
+            
+            <div id="topic6" class="topic-section">
+                <h3>Partikel から (kara) / まで (made)</h3>
+                <p>Partikel <strong>から (kara)</strong> menunjukkan <strong>titik awal</strong>, dan partikel <strong>まで (made)</strong> menunjukkan <strong>titik akhir</strong>. Keduanya bisa digunakan untuk waktu maupun tempat.</p>
+                <div class="contoh-kalimat">
+                    <p>1. 9<ruby>時<rt>じ</rt></ruby>から5<ruby>時<rt>じ</rt></ruby>まで<ruby>働<rt>はたら</rt></ruby>きます。</p>
+                    <p class="terjemahan">(Saya bekerja dari jam 9 sampai jam 5.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>2. <ruby>日本<rt>にほん</rt></ruby>から<ruby>来<rt>き</rt></ruby>ました。</p>
+                    <p class="terjemahan">(Saya datang dari Jepang.)</p>
+                </div>
+                <div class="contoh-kalimat">
+                    <p>3. <ruby>私<rt>わたし</rt></ruby>の<ruby>家<rt>いえ</rt></ruby>から<ruby>駅<rt>えき</rt></ruby>まで<ruby>歩<rt>ある</rt></ruby>きます。</p>
+                    <p class="terjemahan">(Saya berjalan kaki dari rumah saya sampai stasiun.)</p>
+                </div>
+                
+                <div class="tips-box">
+                    <h4>Tips & Trik: Kombinasi</h4>
+                    <p>Anda bisa menggunakan <strong>から</strong> saja, <strong>まで</strong> saja, atau keduanya dalam satu kalimat, tergantung kebutuhan. Kombinasi <code>...から...まで</code> sangat umum untuk menunjukkan durasi atau jarak.</p>
+                </div>
+            </div>
+
+            <div class="quiz-controls mt-6">
+                 <button class="check-btn" id="next-topic-btn" onclick="nextTopic()">Lanjut</button>
+            </div>
+        </div>
+
+        <!-- Konten Latihan Interaktif -->
+        <div id="latihan" class="tab-content">
+            <h2>Latihan Interaktif</h2>
+            <p>Pilih partikel yang tepat untuk melengkapi kalimat berikut.</p>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 1:</strong> <ruby>明日<rt>あした</rt></ruby>、<ruby>駅<rt>えき</rt></ruby> ( ____ ) <ruby>行<rt>い</rt></ruby>きます。</p>
+                <p class="terjemahan mb-4">(Besok, saya pergi ke stasiun.)</p>
+                <div class="options" id="q1-options">
+                    <button onclick="checkAnswer('q1', 'correct', 'Partikel へ (e) digunakan untuk menunjukkan arah atau tujuan pergerakan.')">へ</button>
+                    <button onclick="checkAnswer('q1', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q1', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q1-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 2:</strong> 8<ruby>時<rt>じ</rt></ruby> ( ____ ) <ruby>学校<rt>がっこう</rt></ruby>へ<ruby>来<rt>き</rt></ruby>ました。</p>
+                <p class="terjemahan mb-4">(Saya datang ke sekolah pada jam 8.)</p>
+                <div class="options" id="q2-options">
+                    <button onclick="checkAnswer('q2', 'wrong')">へ</button>
+                    <button onclick="checkAnswer('q2', 'correct', 'Partikel に (ni) digunakan untuk menandai titik waktu spesifik.')">に</button>
+                    <button onclick="checkAnswer('q2', 'wrong')">と</button>
+                </div>
+                <div class="quiz-feedback" id="q2-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 3:</strong> <ruby>私<rt>わたし</rt></ruby>は<ruby>家族<rt>かぞく</rt></ruby> ( ____ ) <ruby>日本<rt>にほん</rt></ruby>へ<ruby>帰<rt>かえ</rt></ruby>りました。</p>
+                <p class="terjemahan mb-4">(Saya pulang ke Jepang dengan keluarga.)</p>
+                <div class="options" id="q3-options">
+                     <button onclick="checkAnswer('q3', 'wrong')">に</button>
+                     <button onclick="checkAnswer('q3', 'wrong')">へ</button>
+                     <button onclick="checkAnswer('q3', 'correct', 'Partikel と (to) digunakan untuk menunjukkan pendamping atau "dengan".')">と</button>
+                </div>
+                <div class="quiz-feedback" id="q3-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 4:</strong> <ruby>日本<rt>にほん</rt></ruby><ruby>語<rt>ご</rt></ruby> ( ____ ) <ruby>勉強<rt>べんきょう</rt></ruby>します。</p>
+                <p class="terjemahan mb-4">(Saya belajar bahasa Jepang.)</p>
+                <div class="options" id="q4-options">
+                    <button onclick="checkAnswer('q4', 'wrong')">が</button>
+                    <button onclick="checkAnswer('q4', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q4', 'correct', 'Partikel を (o) digunakan untuk menandai objek langsung dari kata kerja transitif seperti 勉強します.')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q4-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 5:</strong> <ruby>会社<rt>かいしゃ</rt></ruby> ( ____ ) 9<ruby>時<rt>じ</rt></ruby>まで<ruby>働<rt>はたら</rt></ruby>きました。</p>
+                <p class="terjemahan mb-4">(Saya bekerja di perusahaan sampai jam 9.)</p>
+                <div class="options" id="q5-options">
+                    <button onclick="checkAnswer('q5', 'correct', 'Partikel で (de) digunakan untuk menunjukkan tempat terjadinya sebuah aktivitas, dalam hal ini bekerja.')">で</button>
+                    <button onclick="checkAnswer('q5', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q5', 'wrong')">と</button>
+                </div>
+                <div class="quiz-feedback" id="q5-feedback"></div>
+            </div>
+            
+             <div class="quiz-item">
+                <p><strong>Soal 6:</strong> <ruby>私<rt>わたし</rt></ruby>は<ruby>本<rt>ほん</rt></ruby> ( ____ ) <ruby>読<rt>よ</rt></ruby>みました。</p>
+                <p class="terjemahan mb-4">(Saya membaca buku.)</p>
+                <div class="options" id="q6-options">
+                    <button onclick="checkAnswer('q6', 'correct', 'Partikel を (o) digunakan untuk menandai objek langsung, yaitu 本 (buku).')">を</button>
+                    <button onclick="checkAnswer('q6', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q6', 'wrong')">に</button>
+                </div>
+                <div class="quiz-feedback" id="q6-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 7:</strong> <ruby>朝<rt>あさ</rt></ruby>ごはん ( ____ ) <ruby>食<rt>た</rt></ruby>べます。</p>
+                <p class="terjemahan mb-4">(Saya makan sarapan.)</p>
+                <div class="options" id="q7-options">
+                    <button onclick="checkAnswer('q7', 'wrong')">と</button>
+                    <button onclick="checkAnswer('q7', 'correct', 'Partikel を (o) menandai 朝ごはん (sarapan) sebagai objek dari kata kerja 食べます (makan).')">を</button>
+                    <button onclick="checkAnswer('q7', 'wrong')">で</button>
+                </div>
+                <div class="quiz-feedback" id="q7-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 8:</strong> <ruby>毎日<rt>まいにち</rt></ruby>、<ruby>図書館<rt>としょかん</rt></ruby> ( ____ ) <ruby>勉強<rt>べんきょう</rt></ruby>します。</p>
+                <p class="terjemahan mb-4">(Setiap hari, saya belajar di perpustakaan.)</p>
+                <div class="options" id="q8-options">
+                    <button onclick="checkAnswer('q8', 'wrong')">へ</button>
+                    <button onclick="checkAnswer('q8', 'correct', 'Partikel で (de) digunakan untuk menunjukkan tempat di mana suatu aktivitas (belajar) dilakukan.')">で</button>
+                    <button onclick="checkAnswer('q8', 'wrong')">に</button>
+                </div>
+                <div class="quiz-feedback" id="q8-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 9:</strong> <ruby>昨日<rt>きのう</rt></ruby>、<ruby>友達<rt>ともだち</rt></ruby> ( ____ ) <ruby>電話<rt>でんわ</rt></ruby>をかけました。</p>
+                <p class="terjemahan mb-4">(Kemarin, saya menelepon teman.)</p>
+                <div class="options" id="q9-options">
+                    <button onclick="checkAnswer('q9', 'correct', 'Partikel に (ni) digunakan untuk menandai orang yang dituju dari sebuah aksi, dalam hal ini menelepon.')">に</button>
+                    <button onclick="checkAnswer('q9', 'wrong')">を</button>
+                    <button onclick="checkAnswer('q9', 'wrong')">へ</button>
+                </div>
+                <div class="quiz-feedback" id="q9-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 10:</strong> <ruby>私<rt>わたし</rt></ruby>は<ruby>ペン<rt>ぺん</rt></ruby> ( ____ ) <ruby>手紙<rt>てがみ</rt></ruby>を<ruby>書<rt>か</rt></ruby>きました。</p>
+                <p class="terjemahan mb-4">(Saya menulis surat dengan pulpen.)</p>
+                <div class="options" id="q10-options">
+                    <button onclick="checkAnswer('q10', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q10', 'wrong')">と</button>
+                    <button onclick="checkAnswer('q10', 'correct', 'Partikel で (de) digunakan untuk menunjukkan alat yang digunakan untuk melakukan suatu aksi.')">で</button>
+                </div>
+                <div class="quiz-feedback" id="q10-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 11:</strong> <ruby>私<rt>わたし</rt></ruby>の<ruby>部屋<rt>へや</rt></ruby> ( ____ ) <ruby>犬<rt>いぬ</rt></ruby>が<ruby>います</rt>。</p>
+                <p class="terjemahan mb-4">(Di kamar saya ada anjing.)</p>
+                <div class="options" id="q11-options">
+                    <button onclick="checkAnswer('q11', 'correct', 'Partikel に (ni) digunakan untuk menunjukkan tempat keberadaan dengan kata kerja います (ada, untuk makhluk hidup).')">に</button>
+                    <button onclick="checkAnswer('q11', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q11', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q11-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 12:</strong> <ruby>母<rt>はは</rt></ruby>はパン ( ____ ) ジュースを<ruby>買<rt>か</rt></ruby>いました。</p>
+                <p class="terjemahan mb-4">(Ibu membeli roti dan jus.)</p>
+                <div class="options" id="q12-options">
+                    <button onclick="checkAnswer('q12', 'correct', 'Partikel と (to) digunakan untuk menghubungkan kata benda yang merupakan daftar yang lengkap, seperti roti dan jus.')">と</button>
+                    <button onclick="checkAnswer('q12', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q12', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q12-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 13:</strong> <ruby>日本<rt>にほん</rt></ruby> ( ____ ) <ruby>来<rt>き</rt></ruby>ました。</p>
+                <p class="terjemahan mb-4">(Saya datang dari Jepang.)</p>
+                <div class="options" id="q13-options">
+                    <button onclick="checkAnswer('q13', 'wrong')">まで</button>
+                    <button onclick="checkAnswer('q13', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q13', 'correct', 'Partikel から (kara) menunjukkan titik awal dari pergerakan atau asal.')">から</button>
+                </div>
+                <div class="quiz-feedback" id="q13-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 14:</strong> <ruby>明日<rt>あした</rt></ruby>、<ruby>友達<rt>ともだち</rt></ruby> ( ____ ) <ruby>映画<rt>えいが</rt></ruby>を<ruby>見<rt>み</rt></ruby>ます。</p>
+                <p class="terjemahan mb-4">(Besok, saya menonton film dengan teman.)</p>
+                <div class="options" id="q14-options">
+                    <button onclick="checkAnswer('q14', 'correct', 'Partikel と (to) digunakan untuk menunjukkan orang yang menjadi pendamping dalam sebuah aksi.')">と</button>
+                    <button onclick="checkAnswer('q14', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q14', 'wrong')">で</button>
+                </div>
+                <div class="quiz-feedback" id="q14-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 15:</strong> 6<ruby>時<rt>じ</rt></ruby> ( ____ ) 10<ruby>時<rt>じ</rt></ruby>まで<ruby>働<rt>はたら</rt></ruby>きます。</p>
+                <p class="terjemahan mb-4">(Saya bekerja dari jam 6 sampai jam 10.)</p>
+                <div class="options" id="q15-options">
+                    <button onclick="checkAnswer('q15', 'wrong')">を</button>
+                    <button onclick="checkAnswer('q15', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q15', 'correct', 'Partikel から (kara) menunjukkan titik awal, dan biasanya digunakan bersama まで untuk menunjukkan durasi.')">から</button>
+                </div>
+                <div class="quiz-feedback" id="q15-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 16:</strong> <ruby>家<rt>いえ</rt></ruby> ( ____ ) <ruby>車<rt>くるま</rt></ruby>がありません。</p>
+                <p class="terjemahan mb-4">(Di rumah tidak ada mobil.)</p>
+                <div class="options" id="q16-options">
+                    <button onclick="checkAnswer('q16', 'wrong')">へ</button>
+                    <button onclick="checkAnswer('q16', 'correct', 'Partikel に (ni) digunakan untuk menunjukkan tempat keberadaan, digunakan dengan ありません (tidak ada).')">に</button>
+                    <button onclick="checkAnswer('q16', 'wrong')">で</button>
+                </div>
+                <div class="quiz-feedback" id="q16-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 17:</strong> <ruby>私<rt>わたし</rt></ruby>は<ruby>日本語<rt>にほんご</rt></ruby> ( ____ ) <ruby>勉強<rt>べんきょう</rt></ruby>します。</p>
+                <p class="terjemahan mb-4">(Saya belajar Bahasa Jepang.)</p>
+                <div class="options" id="q17-options">
+                    <button onclick="checkAnswer('q17', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q17', 'correct', 'Partikel を (o) digunakan untuk menandai objek dari kata kerja transitif, yaitu 日本語 (Bahasa Jepang).')">を</button>
+                    <button onclick="checkAnswer('q17', 'wrong')">で</button>
+                </div>
+                <div class="quiz-feedback" id="q17-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 18:</strong> <ruby>先生<rt>せんせい</rt></ruby>は<ruby>学校<rt>がっこう</rt></ruby> ( ____ ) <ruby>来<rt>き</rt></ruby>ます。</p>
+                <p class="terjemahan mb-4">(Guru datang ke sekolah.)</p>
+                <div class="options" id="q18-options">
+                    <button onclick="checkAnswer('q18', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q18', 'correct', 'Partikel へ (e) menunjukkan arah pergerakan atau tujuan.')">へ</button>
+                    <button onclick="checkAnswer('q18', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q18-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 19:</strong> <ruby>駅<rt>えき</rt></ruby> ( ____ ) <ruby>歩<rt>ある</rt></ruby>きます。</p>
+                <p class="terjemahan mb-4">(Saya berjalan kaki di stasiun/dari stasiun.)</p>
+                <div class="options" id="q19-options">
+                    <button onclick="checkAnswer('q19', 'wrong')">へ</button>
+                    <button onclick="checkAnswer('q19', 'wrong')">を</button>
+                    <button onclick="checkAnswer('q19', 'correct', 'Partikel で (de) digunakan untuk menunjukkan tempat aksi (berjalan kaki).')">で</button>
+                </div>
+                <div class="quiz-feedback" id="q19-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 20:</strong> <ruby>弟<rt>おとうと</rt></ruby>は<ruby>部屋<rt>へや</rt></ruby> ( ____ ) <ruby>遊<rt>あそ</rt></ruby>んでいます。</p>
+                <p class="terjemahan mb-4">(Adik laki-laki bermain di kamar.)</p>
+                <div class="options" id="q20-options">
+                    <button onclick="checkAnswer('q20', 'correct', 'Partikel で (de) menunjukkan tempat di mana aktivitas bermain terjadi.')">で</button>
+                    <button onclick="checkAnswer('q20', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q20', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q20-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 21:</strong> <ruby>私<rt>わたし</rt></ruby>は<ruby>会社<rt>かいしゃ</rt></ruby> ( ____ ) <ruby>帰<rt>かえ</rt></ruby>ります。</p>
+                <p class="terjemahan mb-4">(Saya pulang ke kantor.)</p>
+                <div class="options" id="q21-options">
+                    <button onclick="checkAnswer('q21', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q21', 'correct', 'Partikel へ (e) menunjukkan tujuan pergerakan (pulang ke kantor).')">へ</button>
+                    <button onclick="checkAnswer('q21', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q21-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 22:</strong> <ruby>日本語<rt>にほんご</rt></ruby> ( ____ ) <ruby>難<rt>むずか</rt></ruby>しいです。</p>
+                <p class="terjemahan mb-4">(Bahasa Jepang sulit.)</p>
+                <div class="options" id="q22-options">
+                    <button onclick="checkAnswer('q22', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q22', 'correct', 'Partikel は (wa) digunakan untuk menandai topik kalimat.')">は</button>
+                    <button onclick="checkAnswer('q22', 'wrong')">に</button>
+                </div>
+                <div class="quiz-feedback" id="q22-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 23:</strong> <ruby>友達<rt>ともだち</rt></ruby> ( ____ ) <ruby>会<rt>あ</rt></ruby>います。</p>
+                <p class="terjemahan mb-4">(Saya bertemu dengan teman.)</p>
+                <div class="options" id="q23-options">
+                    <button onclick="checkAnswer('q23', 'wrong')">と</button>
+                    <button onclick="checkAnswer('q23', 'wrong')">を</button>
+                    <button onclick="checkAnswer('q23', 'correct', 'Kata kerja 会います (bertemu) menggunakan partikel に untuk menunjukkan orang yang ditemui.')">に</button>
+                </div>
+                <div class="quiz-feedback" id="q23-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 24:</strong> <ruby>鉛筆<rt>えんぴつ</rt></ruby> ( ____ ) <ruby>名前<rt>なまえ</rt></ruby>を<ruby>書<rt>か</rt></ruby>いてください。</p>
+                <p class="terjemahan mb-4">(Tolong tulis nama dengan pensil.)</p>
+                <div class="options" id="q24-options">
+                    <button onclick="checkAnswer('q24', 'correct', 'Partikel で (de) menunjukkan alat yang digunakan untuk menulis.')">で</button>
+                    <button onclick="checkAnswer('q24', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q24', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q24-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 25:</strong> 9<ruby>時<rt>じ</rt></ruby> ( ____ ) <ruby>授業<rt>じゅぎょう</rt></ruby>が<ruby>始<rt>はじ</rt></ruby>まります。</p>
+                <p class="terjemahan mb-4">(Pelajaran dimulai pada jam 9.)</p>
+                <div class="options" id="q25-options">
+                    <button onclick="checkAnswer('q25', 'wrong')">へ</button>
+                    <button onclick="checkAnswer('q25', 'correct', 'Partikel に (ni) digunakan untuk menandai titik waktu spesifik, yaitu jam 9.')">に</button>
+                    <button onclick="checkAnswer('q25', 'wrong')">で</button>
+                </div>
+                <div class="quiz-feedback" id="q25-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 26:</strong> <ruby>私<rt>わたし</rt></ruby>は<ruby>お<rt>お</rt></ruby>いしい<ruby>料理<rt>りょうり</rt></ruby> ( ____ ) <ruby>作<rt>つく</rt></ruby>りました。</p>
+                <p class="terjemahan mb-4">(Saya membuat masakan yang enak.)</p>
+                <div class="options" id="q26-options">
+                    <button onclick="checkAnswer('q26', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q26', 'correct', 'Partikel を (o) menandai 料理 (masakan) sebagai objek dari kata kerja 作りました (membuat).')">を</button>
+                    <button onclick="checkAnswer('q26', 'wrong')">で</button>
+                </div>
+                <div class="quiz-feedback" id="q26-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 27:</strong> <ruby>先生<rt>せんせい</rt></ruby> ( ____ ) <ruby>日本<rt>にほん</rt></ruby><ruby>語<rt>ご</rt></ruby>を<ruby>習<rt>なら</rt></ruby>います。</p>
+                <p class="terjemahan mb-4">(Saya belajar Bahasa Jepang dari guru.)</p>
+                <div class="options" id="q27-options">
+                    <button onclick="checkAnswer('q27', 'wrong')">と</button>
+                    <button onclick="checkAnswer('q27', 'wrong')">を</button>
+                    <button onclick="checkAnswer('q27', 'correct', 'Partikel に (ni) digunakan untuk menunjukkan sumber pelajaran atau dari siapa kita menerima sesuatu.')">に</button>
+                </div>
+                <div class="quiz-feedback" id="q27-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 28:</strong> <ruby>私<rt>わたし</rt></ruby>は<ruby>弟<rt>おとうと</rt></ruby> ( ____ ) <ruby>遊<rt>あそ</rt></ruby>びました。</p>
+                <p class="terjemahan mb-4">(Saya bermain dengan adik laki-laki.)</p>
+                <div class="options" id="q28-options">
+                    <button onclick="checkAnswer('q28', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q28', 'correct', 'Partikel と (to) digunakan untuk menunjukkan pendamping, yaitu bermain "dengan" adik laki-laki.')">と</button>
+                    <button onclick="checkAnswer('q28', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q28-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 29:</strong> <ruby>彼<rt>かれ</rt></ruby>は<ruby>朝<rt>あさ</rt></ruby> ( ____ ) <ruby>走<rt>はし</rt></ruby>ります。</p>
+                <p class="terjemahan mb-4">(Dia berlari di pagi hari.)</p>
+                <div class="options" id="q29-options">
+                    <button onclick="checkAnswer('q29', 'correct', 'Partikel に (ni) dapat digunakan untuk waktu tidak spesifik seperti 朝 (pagi), namun seringkali dihilangkan. Untuk waktu yang lebih spesifik, に digunakan.')">に</button>
+                    <button onclick="checkAnswer('q29', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q29', 'wrong')">と</button>
+                </div>
+                <div class="quiz-feedback" id="q29-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 30:</strong> <ruby>私<rt>わたし</rt></ruby>は<ruby>友達<rt>ともだち</rt></ruby> ( ____ ) <ruby>話<rt>はな</rt></ruby>しました。</p>
+                <p class="terjemahan mb-4">(Saya berbicara dengan teman.)</p>
+                <div class="options" id="q30-options">
+                    <button onclick="checkAnswer('q30', 'correct', 'Partikel と (to) digunakan untuk menunjukkan pendamping, yaitu berbicara "dengan" teman.')">と</button>
+                    <button onclick="checkAnswer('q30', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q30', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q30-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 31:</strong> <ruby>日本<rt>にほん</rt></ruby> ( ____ ) <ruby>今<rt>いま</rt></ruby>、<ruby>桜<rt>さくら</rt></ruby>が<ruby>咲<rt>さ</rt></ruby>いています。</p>
+                <p class="terjemahan mb-4">(Di Jepang sekarang bunga sakura sedang mekar.)</p>
+                <div class="options" id="q31-options">
+                    <button onclick="checkAnswer('q31', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q31', 'correct', 'Partikel に (ni) digunakan untuk menunjukkan tempat keberadaan atau kondisi.')">に</button>
+                    <button onclick="checkAnswer('q31', 'wrong')">へ</button>
+                </div>
+                <div class="quiz-feedback" id="q31-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 32:</strong> <ruby>箸<rt>はし</rt></ruby> ( ____ ) <ruby>寿司<rt>すし</rt></ruby>を<ruby>食<rt>た</rt></ruby>べます。</p>
+                <p class="terjemahan mb-4">(Saya makan sushi dengan sumpit.)</p>
+                <div class="options" id="q32-options">
+                    <button onclick="checkAnswer('q32', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q32', 'correct', 'Partikel で (de) menunjukkan alat yang digunakan untuk melakukan aksi.')">で</button>
+                    <button onclick="checkAnswer('q32', 'wrong')">と</button>
+                </div>
+                <div class="quiz-feedback" id="q32-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 33:</strong> <ruby>日曜日<rt>にちようび</rt></ruby> ( ____ ) <ruby>出<rt>で</rt></ruby>かけます。</p>
+                <p class="terjemahan mb-4">(Saya akan pergi keluar pada hari Minggu.)</p>
+                <div class="options" id="q33-options">
+                    <button onclick="checkAnswer('q33', 'correct', 'Partikel に (ni) digunakan untuk menandai titik waktu spesifik seperti hari.')">に</button>
+                    <button onclick="checkAnswer('q33', 'wrong')">へ</button>
+                    <button onclick="checkAnswer('q33', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q33-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 34:</strong> <ruby>私<rt>わたし</rt></ruby>は<ruby>猫<rt>ねこ</rt></ruby> ( ____ ) <ruby>犬<rt>いぬ</rt></ruby>を<ruby>飼<rt>か</rt></ruby>っています。</p>
+                <p class="terjemahan mb-4">(Saya memelihara kucing dan anjing.)</p>
+                <div class="options" id="q34-options">
+                    <button onclick="checkAnswer('q34', 'correct', 'Partikel と (to) digunakan untuk menghubungkan dua kata benda yang merupakan daftar lengkap.')">と</button>
+                    <button onclick="checkAnswer('q34', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q34', 'wrong')">に</button>
+                </div>
+                <div class="quiz-feedback" id="q34-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 35:</strong> <ruby>バス<rt>ばす</rt></ruby> ( ____ ) <ruby>学校<rt>がっこう</rt></ruby> ( ____ ) <ruby>行<rt>い</rt></ruby>きます。</p>
+                <p class="terjemahan mb-4">(Saya pergi ke sekolah dengan bus.)</p>
+                <div class="options" id="q35-options">
+                    <button onclick="checkAnswer('q35', 'wrong')">に / に</button>
+                    <button onclick="checkAnswer('q35', 'correct', 'Partikel で (de) menunjukkan alat transportasi, dan へ (e) menunjukkan arah atau tujuan.')">で / へ</button>
+                    <button onclick="checkAnswer('q35', 'wrong')">を / に</button>
+                </div>
+                <div class="quiz-feedback" id="q35-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 36:</strong> <ruby>私<rt>わたし</rt></ruby>は<ruby>毎朝<rt>まいあさ</rt></ruby>6<ruby>時<rt>じ</rt></ruby> ( ____ ) <ruby>起<rt>お</rt></ruby>きます。</p>
+                <p class="terjemahan mb-4">(Saya bangun jam 6 setiap pagi.)</p>
+                <div class="options" id="q36-options">
+                    <button onclick="checkAnswer('q36', 'wrong')">へ</button>
+                    <button onclick="checkAnswer('q36', 'correct', 'Partikel に (ni) digunakan untuk menandai titik waktu yang spesifik.')">に</button>
+                    <button onclick="checkAnswer('q36', 'wrong')">から</button>
+                </div>
+                <div class="quiz-feedback" id="q36-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 37:</strong> <ruby>私<rt>わたし</rt></ruby>の<ruby>会社<rt>かいしゃ</rt></ruby>は<ruby>東京<rt>とうきょう</rt></ruby> ( ____ ) あります。</p>
+                <p class="terjemahan mb-4">(Perusahaan saya ada di Tokyo.)</p>
+                <div class="options" id="q37-options">
+                    <button onclick="checkAnswer('q37', 'correct', 'Partikel に (ni) digunakan untuk menunjukkan tempat keberadaan dengan kata kerja あります (ada, untuk benda mati).')">に</button>
+                    <button onclick="checkAnswer('q37', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q37', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q37-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 38:</strong> <ruby>昨日<rt>きのう</rt></ruby>、<ruby>友達<rt>ともだち</rt></ruby> ( ____ ) <ruby>手紙<rt>てがみ</rt></ruby>を<ruby>書<rt>か</rt></ruby>きました。</p>
+                <p class="terjemahan mb-4">(Kemarin, saya menulis surat untuk teman.)</p>
+                <div class="options" id="q38-options">
+                    <button onclick="checkAnswer('q38', 'correct', 'Partikel に (ni) menunjukkan orang yang dituju dari sebuah aksi, dan を (o) menandai objek dari kata kerja.')">に / を</button>
+                    <button onclick="checkAnswer('q38', 'wrong')">と / を</button>
+                    <button onclick="checkAnswer('q38', 'wrong')">で / に</button>
+                </div>
+                <div class="quiz-feedback" id="q38-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 39:</strong> <ruby>私<rt>わたし</rt></ruby>の<ruby>家<rt>いえ</rt></ruby> ( ____ ) <ruby>駅<rt>えき</rt></ruby>まで<ruby>歩<rt>ある</rt></ruby>きます。</p>
+                <p class="terjemahan mb-4">(Saya berjalan kaki dari rumah sampai stasiun.)</p>
+                <div class="options" id="q39-options">
+                    <button onclick="checkAnswer('q39', 'correct', 'Partikel から (kara) menunjukkan titik awal pergerakan.')">から</button>
+                    <button onclick="checkAnswer('q39', 'wrong')">と</button>
+                    <button onclick="checkAnswer('q39', 'wrong')">に</button>
+                </div>
+                <div class="quiz-feedback" id="q39-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 40:</strong> <ruby>何<rt>なに</rt></ruby> ( ____ ) <ruby>見<rt>み</rt></ruby>ますか。</p>
+                <p class="terjemahan mb-4">(Anda menonton apa?)</p>
+                <div class="options" id="q40-options">
+                    <button onclick="checkAnswer('q40', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q40', 'correct', 'Partikel を (o) digunakan untuk menandai objek dari kata kerja 見ます (menonton).')">を</button>
+                    <button onclick="checkAnswer('q40', 'wrong')">で</button>
+                </div>
+                <div class="quiz-feedback" id="q40-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 41:</strong> <ruby>週末<rt>しゅうまつ</rt></ruby> ( ____ ) <ruby>京都<rt>きょうと</rt></ruby> ( ____ ) <ruby>行<rt>い</rt></ruby>きたいです。</p>
+                <p class="terjemahan mb-4">(Di akhir pekan, saya ingin pergi ke Kyoto.)</p>
+                <div class="options" id="q41-options">
+                    <button onclick="checkAnswer('q41', 'wrong')">で / に</button>
+                    <button onclick="checkAnswer('q41', 'correct', 'Partikel に (ni) dapat digunakan untuk menandai waktu (akhir pekan) dan juga tujuan (Kyoto).')">に / に</button>
+                    <button onclick="checkAnswer('q41', 'wrong')">と / へ</button>
+                </div>
+                <div class="quiz-feedback" id="q41-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 42:</strong> <ruby>自転車<rt>じてんしゃ</rt></ruby> ( ____ ) <ruby>駅<rt>えき</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きます。</p>
+                <p class="terjemahan mb-4">(Saya pergi ke stasiun dengan sepeda.)</p>
+                <div class="options" id="q42-options">
+                    <button onclick="checkAnswer('q42', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q42', 'wrong')">と</button>
+                    <button onclick="checkAnswer('q42', 'correct', 'Partikel で (de) digunakan untuk menunjukkan alat atau sarana, dalam hal ini sepeda.')">で</button>
+                </div>
+                <div class="quiz-feedback" id="q42-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 43:</strong> <ruby>日本語<rt>にほんご</rt></ruby> ( ____ ) <ruby>話<rt>はな</rt></ruby>せますか。</p>
+                <p class="terjemahan mb-4">(Apakah kamu bisa berbicara Bahasa Jepang?)</p>
+                <div class="options" id="q43-options">
+                    <button onclick="checkAnswer('q43', 'correct', 'Partikel を (o) digunakan untuk menandai objek dari kata kerja 話せます (bisa bicara).')">を</button>
+                    <button onclick="checkAnswer('q43', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q43', 'wrong')">で</button>
+                </div>
+                <div class="quiz-feedback" id="q43-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 44:</strong> <ruby>今日<rt>きょう</rt></ruby>、<ruby>友達<rt>ともだち</rt></ruby> ( ____ ) <ruby>映画<rt>えいが</rt></ruby>を<ruby>見<rt>み</rt></ruby>ます。</p>
+                <p class="terjemahan mb-4">(Hari ini, saya akan menonton film dengan teman.)</p>
+                <div class="options" id="q44-options">
+                    <button onclick="checkAnswer('q44', 'correct', 'Partikel と (to) digunakan untuk menunjukkan pendamping dalam suatu aktivitas.')">と</button>
+                    <button onclick="checkAnswer('q44', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q44', 'wrong')">へ</button>
+                </div>
+                <div class="quiz-feedback" id="q44-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 45:</strong> <ruby>私<rt>わたし</rt></ruby> ( ____ ) <ruby>犬<rt>いぬ</rt></ruby>が<ruby>います</rt>。</p>
+                <p class="terjemahan mb-4">(Saya memiliki anjing.)</p>
+                <div class="options" id="q45-options">
+                    <button onclick="checkAnswer('q45', 'wrong')">へ</button>
+                    <button onclick="checkAnswer('q45', 'correct', 'Partikel に (ni) digunakan untuk menunjukkan kepemilikan atau keberadaan subjek pada diri seseorang.')">に</button>
+                    <button onclick="checkAnswer('q45', 'wrong')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q45-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 46:</strong> <ruby>来月<rt>らいげつ</rt></ruby>、<ruby>日本<rt>にほん</rt></ruby> ( ____ ) <ruby>帰<rt>かえ</rt></ruby>ります。</p>
+                <p class="terjemahan mb-4">(Bulan depan, saya pulang ke Jepang.)</p>
+                <div class="options" id="q46-options">
+                    <button onclick="checkAnswer('q46', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q46', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q46', 'correct', 'Partikel へ (e) menunjukkan arah pergerakan atau tujuan.')">へ</button>
+                </div>
+                <div class="quiz-feedback" id="q46-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 47:</strong> <ruby>私<rt>わたし</rt></ruby>の<ruby>部屋<rt>へや</rt></ruby> ( ____ ) <ruby>本<rt>ほん</rt></ruby>が<ruby>ありません</rt>。</p>
+                <p class="terjemahan mb-4">(Di kamar saya tidak ada buku.)</p>
+                <div class="options" id="q47-options">
+                    <button onclick="checkAnswer('q47', 'correct', 'Partikel に (ni) digunakan untuk menunjukkan tempat keberadaan dengan kata kerja ありません (tidak ada).')">に</button>
+                    <button onclick="checkAnswer('q47', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q47', 'wrong')">と</button>
+                </div>
+                <div class="quiz-feedback" id="q47-feedback"></div>
+            </div>
+            
+            <div class="quiz-item">
+                <p><strong>Soal 48:</strong> <ruby>私<rt>わたし</rt></ruby>は<ruby>友達<rt>ともだち</rt></ruby> ( ____ ) <ruby>東京<rt>とうきょう</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きます。</p>
+                <p class="terjemahan mb-4">(Saya pergi ke Tokyo dengan teman.)</p>
+                <div class="options" id="q48-options">
+                    <button onclick="checkAnswer('q48', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q48', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q48', 'correct', 'Partikel と (to) digunakan untuk menunjukkan pendamping dalam suatu pergerakan.')">と</button>
+                </div>
+                <div class="quiz-feedback" id="q48-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 49:</strong> <ruby>彼<rt>かれ</rt></ruby>は<ruby>毎日<rt>まいにち</rt></ruby>、<ruby>新聞<rt>しんぶん</rt></ruby> ( ____ ) <ruby>読<rt>よ</rt></ruby>みます。</p>
+                <p class="terjemahan mb-4">(Dia membaca koran setiap hari.)</p>
+                <div class="options" id="q49-options">
+                    <button onclick="checkAnswer('q49', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q49', 'wrong')">で</button>
+                    <button onclick="checkAnswer('q49', 'correct', 'Partikel を (o) digunakan untuk menandai objek langsung, yaitu 新聞 (koran).')">を</button>
+                </div>
+                <div class="quiz-feedback" id="q49-feedback"></div>
+            </div>
+
+            <div class="quiz-item">
+                <p><strong>Soal 50:</strong> 1<ruby>時<rt>じ</rt></ruby> ( ____ ) 3<ruby>時<rt>じ</rt></ruby>まで<ruby>話<rt>はな</rt></ruby>しました。</p>
+                <p class="terjemahan mb-4">(Kami berbicara dari jam 1 sampai jam 3.)</p>
+                <div class="options" id="q50-options">
+                    <button onclick="checkAnswer('q50', 'correct', 'Partikel から (kara) menunjukkan titik awal waktu dan sering dipasangkan dengan まで.')">から</button>
+                    <button onclick="checkAnswer('q50', 'wrong')">に</button>
+                    <button onclick="checkAnswer('q50', 'wrong')">へ</button>
+                </div>
+                <div class="quiz-feedback" id="q50-feedback"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- JavaScript untuk Fungsionalitas Aplikasi ---
+
+        // Fungsi untuk Navigasi Tab
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // --- Fungsi untuk Latihan Pilihan Ganda (diperbarui) ---
+        function checkAnswer(questionId, status, explanation = '') {
+            const feedbackEl = document.getElementById(`${questionId}-feedback`);
+            const options = document.getElementById(`${questionId}-options`).getElementsByTagName('button');
+            
+            if (status === 'correct') {
+                feedbackEl.textContent = `Benar! ${explanation}`;
+                feedbackEl.className = 'quiz-feedback correct';
+            } else {
+                feedbackEl.textContent = 'Salah. Coba perhatikan lagi fungsi tata bahasa atau arti katanya.';
+                feedbackEl.className = 'quiz-feedback wrong';
+            }
+
+            for(let btn of options){
+                btn.disabled = true;
+            }
+        }
+        
+        // --- Fungsi Navigasi Materi Bertahap ---
+        let currentTopicIndex = 0;
+        const topics = document.querySelectorAll('.topic-section');
+        const nextTopicBtn = document.getElementById('next-topic-btn');
+        
+        function showTopic(index) {
+            topics.forEach(topic => topic.classList.remove('active'));
+            topics[index].classList.add('active');
+            
+            if (index === topics.length - 1) {
+                nextTopicBtn.textContent = 'Selesai';
+                nextTopicBtn.disabled = true;
+            } else {
+                nextTopicBtn.textContent = 'Lanjut';
+                nextTopicBtn.disabled = false;
+            }
+        }
+        
+        function nextTopic() {
+            if (currentTopicIndex < topics.length - 1) {
+                currentTopicIndex++;
+                showTopic(currentTopicIndex);
+            }
+        }
+
+        // Inisialisasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            showTopic(currentTopicIndex); // Tampilkan topik pertama saat dimuat
+        });
+        
+    </script>
+</body>
+</html>
